@@ -92,4 +92,5 @@ template<typename T> void vector_properties(const std::vector<T>& vec)
 	cout << "CAPACITY:" << vec.capacity() << endl;
 	cout << "MAX_SIZE:" << vec.max_size() << endl;
 	cout << delimiter << endl;
+
 }
