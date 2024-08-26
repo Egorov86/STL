@@ -15,7 +15,7 @@ template<typename T> void vector_properties(const std::vector<T>& vec);
 
 void main()
 {
-	setlocale(LC_ALL, "Rus ");
+	setlocale(LC_ALL, "");
 #ifdef STL_ARRAY
 	//array - контейнер, который хранит  данные в виде статического массива.
 	const int SIZE = 5;
@@ -70,19 +70,33 @@ void main()
 		cout << *it << tab;
 	}
 	cout << endl;
-	int index; int value;
-	while (index < 0 || index >= vec.size()) {
+	int index;
+	int value;
+	cout << "Введите индекс элемента для вставки (от 0 до " << vec.size() << "): ";
+	cin >> index;
+	while (index < 0 || index >= vec.size()) 
+	{
 		cout << "Неверный индекс. Пожалуйста, введите число от 0 до " << vec.size() << ": ";
 		cin >> index;
 	}
 	cout << endl;
 	cout << "Введите добавляемое значение: "; cin >> value;
-	/*auto iter = vec.cbegin();
-	vec.insert(index, value);
-	auto begin = vec.cbegin();
-	auto end = vec.cend();
-	vec.erase(begin+index-8);
-	std::erase(vec, index);*/
+
+	vec.insert(vec.begin() + index, value); //  Добавление элемента с клавиатуры и по значению индекса.
+	vector_properties(vec);
+	cout << vec.data() << endl;
+	for (int i = 0; i < vec.size(); i++)
+	{
+		cout << *(vec.data() + i) << tab;
+	}
+
+	vec.erase(vec.begin() + index); //  Удаление элемента по значению индекса.
+	vector_properties(vec);
+	cout << vec.data() << endl;
+	for (int i = 0; i < vec.size(); i++)
+	{
+		cout << *(vec.data() + i) << tab;
+	}
 	
 #endif // STL_VECTOR
 }
