@@ -1,6 +1,8 @@
 ﻿#include<iostream>
 #include<array>
 #include<vector>
+#include<list>
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -10,6 +12,7 @@ using std::endl;
 
 //#define STL_ARRAY
 #define STL_VECTOR
+//#define STL_LIST
 
 template<typename T> void vector_properties(const std::vector<T>& vec);
 
@@ -81,8 +84,10 @@ void main()
 	}
 	cout << endl;
 	cout << "Введите добавляемое значение: "; cin >> value;
-
-	vec.insert(vec.begin() + index, value); //  Добавление элемента с клавиатуры и по значению индекса.
+	std::vector<int>::iterator position = vec.begin();
+	std::advance(position, index);
+	vec.insert(position, value);
+	//vec.insert(vec.begin() + index, value); //  Добавление элемента с клавиатуры и по значению индекса.
 	vector_properties(vec);
 	cout << vec.data() << endl;
 	for (int i = 0; i < vec.size(); i++)
@@ -99,7 +104,29 @@ void main()
 	}
 	
 #endif // STL_VECTOR
+
+#ifdef STL_LIST
+
+	std::list<int> list = { 3, 5, 8, 13, 21, 34, 55 };
+	for (std::list<int>::iterator it = list.begin(); it != list.end(); ++it)
+		cout << *it << tab;
+	cout << endl;
+	int index;
+	int value;
+	cout << "Введите индекс элемента :"; cin >> index;
+	cout << "Введите значение элемента :"; cin >> value;
+	std::list<int>::iterator position = list.begin();
+	for (int i = 0; i < index; i++)++position;
+	std::advance(position, index);
+	list.insert(position, value);
+	for (int i : list) cout << i << tab; cout << endl;
+
+#endif // STL_LIST
+
+
 }
+
+
 template<typename T> void vector_properties(const std::vector<T>& vec)
 {
 	cout << "SIZE:\t" << vec.size() << endl;
