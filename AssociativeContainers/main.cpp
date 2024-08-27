@@ -2,6 +2,7 @@
 #include<string>
 #include<map>
 #include<vector>
+#include<algorithm>
 
 using std::cin;
 using std::cout;
@@ -10,7 +11,8 @@ using std::endl;
 #define tab "\t"
 #define delimiter "\n----------------------------------\n"
 
-#define STL_MAP
+//#define STL_MAP
+#define STL_AUTO
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -49,14 +51,15 @@ void main()
 
 #endif // STL_MAP
 
+#ifdef STL_AUTO
 	std::map<std::string, std::vector<std::string>> dictionary =
 	{
 		std::pair<std::string, std::vector<std::string>>("map", {"карта", "план", "таблица"}),
 		std::pair<std::string, std::vector<std::string>>("window", {"окно", "витрина"}),
 		std::pair<std::string, std::vector<std::string>>("statement", {"утверждение", "заявление", "высказывание"}),
-		std::pair<std::string, std::vector<std::string>>("journey", {"путешествие", "поезд","рейс", "прогулка"})
+		std::pair<std::string, std::vector<std::string>>("journey", {"путешествие", "поездка","рейс", "прогулка"})
 	};
-	for (std::map<std::string, std::vector<std::string>>::iterator it = dictionary.begin(); it != dictionary.end(); ++it)
+	/*for (std::map<std::string, std::vector<std::string>>::iterator it = dictionary.begin(); it != dictionary.end(); ++it)
 	{
 		cout.width(16);
 		cout << std::left;
@@ -66,7 +69,21 @@ void main()
 			cout << *jt;
 			cout << (*jt != it->second.back()?", ":";");
 		}
-		/*cout << "\b\b\b\b";*/
+		//cout << "\b\b\b\b";
+		cout << endl;
+	}*/
+	for (auto& key : dictionary)
+	{
+		cout.width(9);
+		cout << std::left;
+		cout << key.first << ": ";
+		for (std::vector<std::string>::iterator jt = key.second.begin(); jt != key.second.end(); ++jt)
+		{
+			cout << *jt;
+			cout << (*jt != key.second.back() ? ", " : ";");
+		}
 		cout << endl;
 	}
+#endif // STL_AUTO
+
 }
